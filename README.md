@@ -1,6 +1,6 @@
 # InCity - An E-Commerce Website
 
-![alt text](https://github.com/abdeali004/InCity/blob/master/Project_Images/HomePage.png?raw=true)
+![alt text](https://github.com/abdeali004/InCity/blob/master/Project_Images/homePage.png?raw=true)
 
 It is an e-commerce platform that handles data of three different types of users: Wholesalers, retailers, and customers. The overall idea behind the project is to merge all three types of users and interact with them together to fulfill their needs within the city.
 
