@@ -1,0 +1,230 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href={% static '/icons/fontAwesome/css/font-awesome.min.css' %}>
+    <link rel="stylesheet" href = {% static '/css/base.css' %} >
+    {% block style %}
+    {% endblock style %}
+    {% block head %}
+    {% endblock head %}
+    <title>
+    {% block title %}
+    {% endblock title %}
+    </title>
+</head>
+
+<body {% if typeOf != "wholeseller" %}  onload="readCart('{{request.user.id}}')" {% endif %}>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light"
+        style="background-color:  rgb(253, 220, 150) !important;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><b>InCity</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={% url 'home' %}>Home</a>
+                    </li>
+                    {% if typeOf != "wholeseller" %} 
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url 'product' productUrl="all" %} >All Products</a>
+                    </li>
+                    {% endif %}
+                    {% if typeOf != "customer" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url 'shop' productUrl=request.user %} >MyShop</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{request.user}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href={% url 'profile' %}>My Profile</a></li>
+                            {% if typeOf != "wholeseller" %}
+                            <li><a class="dropdown-item" href={% url 'myOrders' %}>My orders</a></li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href={% url 'logout' %}>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% if typeOf != "wholeseller" %}
+                <form action = {% url 'search' %} method = "GET" class="d-flex">
+                    <input class="form-control me-2 search_block" type="search" name = "searchName" placeholder="Search Product or Store"
+                        aria-label="Search">
+                    <button class="btn btn-outline-warning search_button" type="submit">Search</button>
+                </form>
+                
+                    <abbr title= "Wishlist" ><a href = {% url 'myWishlist' %} id ="wishlist"><i class="fas fa-heart-broken fa-lg wishlistIcon"></i></a></abbr>
+                    <abbr title= "Cart" ><a href = {% url 'myCart' %}><button class="cartButton"><img id = 'cartButton' src={% static '/icons/cart32.png' %}></img></button></a></abbr>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!--navbar ends-->
+{% block body %}
+{% endblock body %}
+
+
+    <!--footer basic-->
+    <footer class="site-footer footer">
+    {% block footer %}
+    {% endblock footer %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">
+            <a href="#">LoveToCode</a>
+          </p>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <ul class="social-icons">
+            <li><a class="facebook" href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="dribbble" href="#"><i class="fa fa-github"></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <!--footer basic ends-->
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+ {% if typeOf != "wholeseller" %} 
+<script>
+function readCart(user)
+{
+    var result = "";
+    $.ajax({
+        type: "POST",
+        url: '/readCart',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'user': user,
+   
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            result = data.cartValue;
+          if (result == "true") {
+              document.getElementById("cartButton").src = "{% static '/icons/cart232.png' %} ";
+          }
+          else{
+            document.getElementById("cartButton").src = "{% static '/icons/cart32.png' %} ";
+          }
+        }
+      });
+      readWishlist(user);
+      return result;
+}
+
+function updateCart(user,productId,value)
+{
+  
+    var result = "";
+    $.ajax({
+        type: "POST",
+        url: '/updateCart',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'user': user,
+          'productId': productId,
+          'value': value, 
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            result = data.success;
+            readCart(user);
+        }
+      });
+      return result;
+}
+
+function readWishlist(user)
+{
+    var result1 = "";
+    $.ajax({
+        type: "POST",
+        url: '/readWishlist',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'user': user,
+   
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            result1 = data.WishlistValue;
+          if (result1 == "true") {
+              document.getElementById("wishlist").innerHTML = '<i class="fas fa-heart fa-lg wishlistIcon"></i>';
+          }
+          else{
+            document.getElementById("wishlist").innerHTML = '<i class="fas fa-heart-broken fa-lg wishlistIcon"></i>';
+          }
+        }
+      });
+      return result1;
+}
+
+function updateWishlist(user,productId,value)
+{
+    var result2 = "";
+    $.ajax({
+        type: "POST",
+        url: '/updateWishlist',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'user': user,
+          'productId': productId,
+          'value': value, 
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {           
+            result2 = data.success;
+            readWishlist(user);
+        }
+      });  
+      return result2;
+}
+{% endif %}
+</script>
+
+</body>
+
+</html>

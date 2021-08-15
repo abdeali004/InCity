@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href={% static '/css/productMain.css' %}>
+{% endblock style %}
+
+{% block head %}
+
+{% endblock head %}
+
+
+{% block title %}
+Product Page
+{% endblock title %}
+
+{% block body %}
+
+<!--container starts-->
+<div class="container">
+  <!--row starts-->
+  <div class="row">
+    <!--col starts-->
+    <div class="col-md-3 ">
+      <!--corosel starts-->
+      <div id="carouselExampleIndicators" class="carousel slide corCol" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+  {% if data.images %}
+  {% for image in data.images %}
+    <div class="carousel-item {% if image.value == 1 %} active {% endif %}">
+      <img src="{{image.target.url}}" class="d-block w-100" alt="...">
+    </div>
+  {% endfor %}
+  {% endif %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+      <!--cor ends-->
+
+    </div>
+    <!--col ends-->
+    <!--column starts-->
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <h5 class="card-header">Product Id: <i>{{data.productId}}</i>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        {% if typeOf != "wholeseller" %}
+        <abbr title= "Add to Wishlist"><a onclick = "addWishlist('{{request.user.id}}','{{data.productId}}')"><i class="fa fa-heart fa-lg productWish" id = "wishlistProductIcon" style = {% if not data.inWishlist %}"color: rgb(105, 105, 105);"{% endif %}{% if data.inWishlist %}"color: red;"{% endif %}></i></a></abbr></h5>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{data.productName}}</h5><br>
+          <h5 class="card-text" style = "color:green;"><b>Our Price: </b>₹ <u>{{data.selling}}</u></h5>
+          <h8 class="card-text"><s>Actual Price: <b>₹ {{data.actual}}</s> ({{data.off}}% off)</b></h8><br><br>
+          {% if typeOf != "wholeseller" %}
+          {% if not data.inCart %}
+          <div id = "cartArea">
+          <p id="product_cart_para">
+            <button href="#" id="product_cart" class="product_button" href="#" onClick="buttonAnimate('{{request.user.id}}','{{data.productId}}')">ADD TO
+              CART</button>
+          </p>
+          </div>
+          {% endif %}
+          {% endif %}
+
+          {% if data.inCart %}
+          <div id = "cartArea">
+          <div class = "row">
+          <div class = "col-md-1">
+          <button type="button" id = "buttonIncDec" class="btn btn-danger" onclick="valueChange('{{request.user.id}}','{{data.productId}}',0)" value = \'-\' style = "width: 40px;">-</button>
+          </div>
+          <div class = "col-md-3">
+          <input type="text" id = "qty" class="form-control" placeholder="" value = {{data.countInCart}} aria-label="Example text with button addon" aria-describedby="button-addon1" onkeyup="valueCheck('{{request.user.id}}','{{data.productId}}')"></div>
+          <div class = "col-md-1">
+          <button type="button" id = "buttonIncDec" class="btn btn-success" onclick="valueChange('{{request.user.id}}','{{data.productId}}',1)" value = \'+\'>+</button>
+          </div>
+          </div>
+          </div>
+          {% endif %}
+
+          {% if data.stock != 0 %}
+          <p class = "card-title" style = "color:#c7a442;">In Stock</p>
+          {% endif %}
+          {% if data.stock == 0 %}
+          <p class = "card-title" style = "color:#c7a442;">Out of Stock</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!--col ends-->
+  </div>
+  <!--row ends-->
+
+  <hr>
+  <!--desc block-->
+  <div class="card text-center">
+    <div class="card-header">
+      By Seller : {{data.seller}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Description</h5>
+      <p class="card-text">{{data.description}}</p>
+
+    </div>
+    <div class="card-footer text-muted">
+      A {{data.shopName}} Product
+    </div>
+  </div>
+
+  <!--desc ends-->
+  <hr>
+  <!--review block-->
+  <span class="heading">User Rating</span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <p>4.1 average based on 254 reviews.</p>
+  <hr style="border:3px solid #f1f1f1">
+
+  <div class="row">
+    <div class="side">
+      <div>5 star</div>
+    </div>
+    <div class="progress middle">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 59%"></div>
+    </div>
+    <div class="side right">
+      <div>150</div>
+    </div>
+    <div class="side">
+      <div>4 star</div>
+    </div>
+    <div class="progress middle">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+        aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+    </div>
+    <div class="side right">
+      <div>63</div>
+    </div>
+    <div class="side">
+      <div>3 star</div>
+    </div>
+    <div class="progress middle">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75"
+        aria-valuemin="0" aria-valuemax="100" style="width: 6%"></div>
+    </div>
+    <div class="side right">
+      <div>15</div>
+    </div>
+    <div class="side">
+      <div>2 star</div>
+    </div>
+    <div class="progress middle">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 2%"></div>
+    </div>
+    <div class="side right">
+      <div>6</div>
+    </div>
+    <div class="side">
+      <div>1 star</div>
+    </div>
+    <div class="progress middle">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 8%"></div>
+    </div>
+    <div class="side right">
+      <div>20</div>
+    </div>
+  </div>
+  <!--review block ends-->
+  <hr>
+
+</div>
+<!--container ends-->
+
+<!--js file-->
+<script>
+  function valueChange(user,productId,p) {
+    var $button = $('#buttonIncDec');
+    var oldValue = $("#qty").val();
+    var check = true;
+    if (p == 1) {
+      check = valueCheck();
+      var newVal = parseInt(oldValue) + 1;
+    } else {
+      // Don't allow decrementing below zero or zero
+      if (oldValue > 1) {
+        var newVal = parseInt(oldValue) - 1;
+      } else {
+        value = "";
+        updateCart(user,productId,value);
+        readCart(user);
+        readCart(user);
+        document.getElementById("cartArea").innerHTML = '<p id="product_cart_para"><button href="#" id="product_cart" class="product_button" href="#" onClick="buttonAnimate(\'{{request.user.id}}\',\'{{data.productId}}\')">ADD TOCART</button></p>';
+        //delete product
+      }
+    }
+    if (check & newVal != null) {
+      $('#qty').val(newVal);
+      value = document.getElementById("qty").value;
+      updateCart(user,productId,value);
+      readCart(user);
+    }
+  }
+
+  function buttonAnimate(user,productId) {
+    updateCart(user,productId,1);
+    readCart(user);
+    readCart(user);
+    document.getElementById("product_cart_para").innerHTML = '<div class = "row"><div class = "col-md-1"><button type="button" id = "buttonIncDec" class="btn btn-danger" onclick="valueChange(\'{{request.user.id}}\',\'{{data.productId}}\',0)" value = \'-\' style = "width: 40px;">-</button></div><div class = "col-md-3"><input type="text" id = "qty" class="form-control" placeholder="" value = 1 aria-label="Example text with button addon" aria-describedby="button-addon1" onkeyup="valueCheck(\'{{request.user.id}}\',\'{{data.productId}}\')"></div><div class = "col-md-1"><button type="button" id = "buttonIncDec" class="btn btn-success" onclick="valueChange(\'{{request.user.id}}\',\'{{data.productId}}\',1)" value = \'+\'>+</button></div></div>';
+
+  }
+
+  function valueCheck(user,productId) {
+    var x = document.getElementById("qty").value;
+    var patt1 = /[^0-9]/g;
+    console.log("here");
+    if (x.startsWith("-")) {
+      console.log("-here");
+      document.getElementById("qty").value = 1;
+      value = document.getElementById("qty").value;
+      updateCart(user,productId,value);
+      return false;
+    }
+    else if (x.match(patt1)) {
+      document.getElementById("qty").value = x.replace(x, 1);
+      value = document.getElementById("qty").value;
+      updateCart(user,productId,value);
+      return false;
+    }
+    else if (x >= 5) {
+      document.getElementById("qty").value = x.replace(x, 5);
+      value = document.getElementById("qty").value;
+      updateCart(user,productId,value);
+      return false;
+    }
+    return true;
+  }
+
+function addWishlist(user,productId)
+{
+  var color = document.getElementById("wishlistProductIcon").style.color;
+  if (color == "rgb(105, 105, 105)"){
+    var result = updateWishlist(user,productId,"true");
+    if (result == "true")
+    {
+      document.getElementById("wishlistProductIcon").style.color = "red";
+    }
+  }
+  else{
+    var result = updateWishlist(user,productId,"false");
+    if (result == "true")
+    {
+      document.getElementById("wishlistProductIcon").style.color = "rgb(105, 105, 105)";
+    }
+  }
+  readWishlist(user);
+}
+
+</script>
+<!--js ends-->
+{% endblock body %}

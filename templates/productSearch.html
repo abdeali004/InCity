@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Search Results
+{% endblock title %}
+
+
+
+{% block head %}
+<link rel="stylesheet" href = {% static '/css/productSearch.css' %} >
+
+{% endblock head %}
+
+
+{% block body %}
+<!--container starts-->
+<div class = "container">
+
+
+{% if disable %}
+  <div class="row">
+  <div class = "col">
+  </div>
+
+  <div class = "col">
+    <section id="first" class="section">
+        <div class="radio-container"> <input type="radio" name="group1" id="radio-1" onclick = "sortItem('all')" checked > <label for="radio-1"><span class="radio">All</span></label> </div>
+        <div class="radio-container"> <input type="radio" name="group1" id="radio-2" onclick = "sortItem('shop')"> <label for="radio-2"><span class="radio">Shops</span></label> </div>
+        <div class="radio-container"> <input type="radio" name="group1" id="radio-3" onclick = "sortItem('products')"> <label for="radio-3"><span class="radio">Products</span></label> </div>
+    </section>
+    </div>
+
+    <div class = "col">
+  </div>
+
+  </div>  
+{% endif %}
+
+
+{% if shops %}
+<div class = "row" id = "shop">
+
+
+<hr>
+<center><h3><b>Shops</b></h3></center>
+<hr>
+
+{% for item in shops %}
+    <div class="card mb-3" style = "width: 23rem;">
+        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><b><u>{{item.shopName}}</u></b></h5>
+            <p class="card-text"><b>Categories :</b> {{item.categories}}</p>
+            <center><a href="shop/{{item.id}}" class="btn btn-warning">View Shop</a>
+            <p class="card-text"><small class="text-muted">Owner: {{item.owner}}</small></p></center>
+        </div>
+    </div>
+{% endfor %}
+
+</div>
+<!--rown ends-->
+{% endif %}
+
+
+{% if products %}
+<div class = "row" id = "products">
+<hr>
+<center><h3><b>Products</b></h3></center>
+<hr>
+
+{% for item in products %}
+
+    <div class="col-md-offset-4 card" style="max-width: 12rem;">
+        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{item.productName}}</h5>
+            <p class="card-text" style = "color:green;"><b>Price: </b>₹ <u>{{item.selling}}</u></p>
+            <h8 class="card-text">&emsp;&ensp; <b><s>₹ {{item.actual}}</s></b></h8><br>
+            <a href={% url 'productDetail' productUrl=item.id %} class="btn btn-warning">View Product</a>
+        </div>
+    </div>
+
+{% endfor %}
+
+</div>
+<!--rown ends-->
+{% endif %}
+
+
+{% if not disable %}
+    <div class = "centered">
+        <img src="{% static '/img/noResult.png' %}" />
+        <center><h5>No Products or Shops in this Search Category.</h5></center><br>
+    </div>
+    
+    
+{% endif %}
+
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+<script>
+function sortItem(name)
+{
+    var shop = document.getElementById('shop');
+    var product = document.getElementById('products');
+    if (name == "shop")
+    {
+        if(shop != null)
+            document.getElementById("shop").style.display = "block";
+        if(product != null)
+            document.getElementById("products").style.display = "none";
+    }
+    else if (name == "products")
+    {
+        if(shop != null)
+            document.getElementById("shop").style.display = "none";
+        if(product != null)
+            document.getElementById("products").style.display = "block";
+    }
+    else
+    {
+        if(shop != null)
+            document.getElementById("shop").style.display = "block";
+        if(product != null)
+            document.getElementById("products").style.display = "block";
+    }
+}
+
+</script>
+
+{% endblock body %}

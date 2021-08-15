@@ -1,0 +1,33 @@
+body {
+    /* background: #3a3228; */
+    background: -webkit-linear-gradient(to right, #ffd399, #3a3228);
+    background: linear-gradient(to right, #f7cb91, #3a3228);
+    min-height: 100vh;
+  }
+
+.bg-light {
+    background-color: #f5e6c1!important;
+}
+
+.fa
+{
+    color: rgb(136, 18, 18);
+}
+.fa:hover
+{
+    color:red;
+    transform: scale(1.17) !important;
+}
+
+.notify_code
+{
+    font-size: 12px !important;
+    color: rgb(184, 0, 0) !important;
+}
+
+.quantity_class
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 40px;
+}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Your Shop
+{% endblock title %}
+
+
+{% block body %}
+<div class = "container" style = "margin-top:10px;margin-bottom:10px;">
+<center><b><h2> Edit Your Digital Shop </h2></b></center>
+<center><h6 style = "color:red;"> Note: Editing your shop details will also results in re-verification process. </h6></center>
+<br>
+<br>
+    <form method = "POST" action = "updateShop" enctype = "multipart/form-data">
+    {% csrf_token %}    
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Shop Name</span>
+            <input type="text" name = "shopName" class="form-control" aria-label="Sizing example input" value = "{{shop.shopName}}" aria-describedby="inputGroup-sizing-default" disabled>
+        </div>
+        
+        <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Categories</span>
+        
+        {% for category in shop.categories %}
+        <div class="form-check" style= "margin-left:10px;">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" onclick = "categoryInput('{{category.name}}')" {{category.tag}}>
+            <label class="form-check-label" for="flexCheckChecked" >
+                {{category.name}}
+            </label>
+        </div>
+       {% endfor %}
+
+        <input type = "hidden" name = "categoryName" id = "categoryId" value = "{{shop.categoriesNormal}}">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Owner Name</span>
+            <input type="text" class="form-control" name = "owner" aria-label="Sizing example input" value = "{{shop.owner}}" aria-describedby="inputGroup-sizing-default" disabled>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+            <input type="text" class="form-control" name = "address" aria-label="Sizing example input" value = "{{shop.address}}" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">contact</span>
+            <input type="text" class="form-control" name = "contact" aria-label="Sizing example input" value = "{{shop.contact}}" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">City</span>
+            <input type="text" class="form-control" name = "city" aria-label="Sizing example input" value = "{{shop.city}}" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">State</span>
+            <input type="text" class="form-control" name = "state" aria-label="Sizing example input" value = "{{shop.state}}" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">PinCode</span>
+            <input type="text" class="form-control" name = "postal" aria-label="Sizing example input" value = "{{shop.postal}}" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+            <textarea type="text" class="form-control" name = "desc" aria-label="Sizing example input" placeholder = "Tell users something about your Shop..." aria-describedby="inputGroup-sizing-default"required>{{shop.description}}</textarea>
+        </div>
+
+        <hr>
+        <h5>Shop Images</h5>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Main Image</label>
+            <input class="form-control" name = "image1" type="file" id="formFile" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Second Image</label>
+            <input class="form-control" name = "image2" type="file" id="formFile" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Third Image</label>
+            <input class="form-control" name = "image3" type="file" id="formFile" required>
+        </div>
+        <hr>    
+
+        <center>
+        <button type="submit" class="btn btn-success">Proceed to verification</button>
+        </center>
+
+    </form>
+
+</div>
+
+<script>
+
+    function categoryInput(val)
+    {
+        var category = document.getElementById("categoryId").value + ",";
+        if (category.includes(val + ","))
+        {
+            category = category.replace(val + "," , "");
+        }
+        else{
+        category += val + ",";
+        }
+        if (category == "")
+        {
+            category = "men,";
+        }
+        //console.log(category);
+        document.getElementById("categoryId").value = category.slice(0,category.length-1);
+
+    }
+</script>
+{% endblock body %}
+

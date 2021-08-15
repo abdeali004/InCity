@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<style>
+    .card{
+            margin-top : 10px;
+            margin-bottom : 10px;
+            margin-left: 3px;
+            margin-right: 3px;
+            border-style: solid;
+            border-width: 3px;
+            border-radius : 15px;
+        }
+    .card:hover
+    {
+        transform: scale(1.03) !important;
+    }
+
+    .centered {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+</style>
+{% endblock head %}
+{% block title %}
+{{request.user}} Products
+{% endblock title %}
+
+{% block body %}
+
+<div class = "container">
+
+    <div class = "row">
+    {% if data %}
+    {% for product in data %}
+        <div class="card mb-3" id = "{{product.productId}}" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img src="{{product.image.url}}" alt="..." style="width: 170px;">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <a href = {% url 'productDetail' productUrl=product.productId %}>
+                    <h8 class="card-title"><b>Product Id: </b>{{product.productId}} </h8>
+                    </a>
+                    <p class="card-text">Product Name : {{product.productName}}</p>
+                    <div class = "row">
+                    <div class = "col">
+                    <p class="card-text">Stock : {{product.stock}}</p>
+                    </div>
+                    <div class = "col">
+                    <p class="card-text">Buyed : {{product.buyed}}</p>
+                    </div>
+                    </div>
+                    <div class = "row">
+                    <div class = "col">
+                    <p class="card-text">Wishlist : {{product.wishlist}}</p>
+                    </div>
+                    <div class = "col">
+                    <p class="card-text">Views : {{product.views}}</p>
+                    </div>
+                    </div>
+                    <br>
+                    <div class = "row">
+                    <div class = "col"><center><a href = "editProduct/{{product.productId}}" target = "_blank"><button type="button" class="btn btn-secondary">Edit</button></a></center></div>
+                    <div class = "col"><center><button type="button" class="btn btn-danger" onclick = "deleteProduct('{{product.productId}}')">Delete</button></center></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+    {% if not data %}
+    <div class = "centered">
+        <img src="{% static '/img/noResult.png' %}" />
+        <center><h5>No Product Uploaded.</h5></center><br>
+        <center><a href = "createProduct"><button type="button" class="btn btn-warning">Add Product Now</button></a></center>
+    </div>
+    
+    
+    {% endif %}
+
+
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+
+function deleteProduct(productId)
+{
+    var result = "";
+    $.ajax({
+        type: "POST",
+        url: '/ajaxDeleteProduct',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'productId': productId,
+   
+        },
+        dataType: 'json',
+        success: function (data) {
+            result = data.result;
+          if (result == "true") {
+            document.getElementById(productId).remove();
+          }
+
+        }
+      });
+      return result;
+}
+
+
+</script>
+{% endblock body %}
+

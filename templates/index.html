@@ -1,0 +1,672 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href = {% static '/css/index.css' %} >
+{% endblock style %}
+
+{% block title %}
+Welcome to InCity
+{% endblock title %}
+
+{% block body %}
+
+  <!--corousel-->
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+      <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static '/img/corr1.jpg' %}" class="d-block w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static '/img/corr2.jpg' %}" class="d-block w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static '/img/corr3.jpg' %}" class="d-block w-100" alt="">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+  <!--corousel ends-->
+  
+
+  <!--burron group>-->
+  {% if typeOf != "customer" %}
+  <br>
+  <hr>
+    <div class =  "row">
+
+     
+      <div class = "col">
+      <center>
+      {% if not isShop %}
+        <a href = "createShop" target = "_blank"><button type="button" class="btn createButton" ><b>Create Shop</b></button></a>
+        {% endif %}
+        {% if isShop %}
+        <a href = "myProducts" target = "_blank"><button type="button" class="btn createButton" ><b>My Products</b></button></a>
+        {% endif %}
+      </center>
+      </div>
+
+      <div class = "col">
+      <center>
+        <a href = "createProduct" target = "_blank"><button type="button" class="btn createButton" ><b>Create Product</b></button></a>
+      </center>
+      </div>
+
+    </div>
+
+      <br>
+  <hr>
+
+    {% endif %}
+    <!--button grp ends-->
+
+  
+
+  <div class="container">
+    <br>
+    
+    <!--quote-->
+    <div class="card quote">
+      <div class="card-header">
+        <b>Quote</b>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p><i>“Whoever said that money can’t buy happiness simply didn’t know where to go shopping.”</i></p>
+          <footer class="blockquote-footer">Bo Derek</footer>
+        </blockquote>
+      </div>
+    </div>
+    <hr>
+    <!--quote ends-->
+
+    <!--featured starts-->
+    <div class="card text-center featured">
+      <div class="card-header">
+        <h5 class="card-title">InCity</h5>
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">
+          <center>A shopping site for those who love to know their city and wants the best products with best deals
+            within their city. This site also helps you the right shop and the right product as per your need.</center>
+        </p>
+        <a href="#" class="btn btn-outline-warning search_button">Know More</a>
+      </div>
+      <div class="card-footer text-muted">
+        LoveToCode
+      </div>
+    </div>
+    <hr>
+    <!--feature ends-->
+
+    <!--accordian-->
+    {% if typeOf != "wholeseller" %}
+    <center>
+      <h2><i><u><b> Purchase Menu </b></u></i></h2>
+    </center>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <center>
+              <h3> Category</h3>
+            </center>
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <br>
+            <!--Shop list-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/menswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Mens Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/womenswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Womens Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shoeswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Shoe Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/homedecor.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Home Decor</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/kirana.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">General Store</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/pharmacy.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Pharmacy</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            <center>
+              <h3> Famous Shops</h3>
+            </center>
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body"><br>
+
+            <!--Shop list-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Jeetu Fashion Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Radha Dresses</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Awataar</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Badshah Store</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Indo Chemist</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shopdefault.png' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Paras Medical</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            <center>
+              <h3>Top Products</h3>
+            </center>
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body"><br>
+            <!--Shop list-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/menswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Mens Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/womenswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Womens Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/shoeswear.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Shoe Wear</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/homedecor.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Home Decor</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+            <!--row start-->
+            <div class="row">
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/kirana.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">General Store</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <button class="cardbutton">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{% static '/img/pharmacy.jpg' %}" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Pharmacy</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional
+                            content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--row ends-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    {% endif %}
+    <!--Accordian ends-->
+
+    <!--Our Moto-->
+    <center>
+      <h2><b><u><i>Our Features</b></u></i></h2>
+    </center>
+    <br><br>
+    <div class="row">
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/offers.png' %}></img><br><br>
+          <h5>Best Offers</h5>
+        </center>
+      </div>
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/quality.png' %}></img><br><br>
+          <h5>Best Quality</h5>
+        </center>
+      </div>
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/delivery.png' %}></img><br><br>
+          <h5>Best Delivery</h5>
+        </center>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/bestitems.png' %}></img><br><br>
+          <h5>Almost all Items</h5>
+        </center>
+      </div>
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/exchange.png' %}></img><br><br>
+          <h5>Best Exchange service</h5>
+        </center>
+      </div>
+      <div class="col tags">
+        <center>
+          <img src={% static '/icons/payment.png' %}></img><br><br>
+          <h5>Multiple Payment</h5>
+        </center>
+      </div>
+    </div>
+    <!--Moto ends-->
+
+  </div>
+  <br>
+
+  <!--footer starts-->
+{% endblock body %}
+  <!-- Site footer -->
+  {% block footer %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6>About Developer</h6>
+          <p><b>Abdeali Stationwala</b></p>
+          <p class="text-justify"><i>I am a student of MCA and highly passionate about coding. I am a backend developer
+              and having a high interest in the field of data science.</i></p>
+          <p><b>Vision</b></p>
+          <p class="text-justify"><i>Transform the field of Data Science with Innovative break through’s in various
+              aspects of Business Intelligence, Data Analytics, Data Engineering, Deep Learning, Artificial
+              Intelligence.</i></p>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <center>
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><button type="button" class="btn footbutton">Clothing</button></li>
+              <li><button type="button" class="btn footbutton">Footwear</button></li>
+              <li><button type="button" class="btn footbutton">Medical</button></li>
+              <li><button type="button" class="btn footbutton">Kirana</button></li>
+              <li><button type="button" class="btn footbutton">Home Decor</button></li>
+            </ul>
+          </center>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <center>
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><button type="button" class="btn footbutton">Contact Us</button></li>
+              <li><button type="button" class="btn footbutton">Contribute</button></li>
+              <li><button type="button" class="btn footbutton">Privacy Policy</button></li>
+              <li><button type="button" class="btn footbutton">Help</button></li>
+            </ul>
+          </center>
+        </div>
+      </div>
+      <hr>
+    </div>
+      {% endblock footer %}
+
+  <!--footer ends-->
+  

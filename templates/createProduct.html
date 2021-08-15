@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Shop
+{% endblock title %}
+
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+<div class = "container" style = "margin-top:10px;margin-bottom:10px;">
+<center><b><h2> Create Your Product </h2></b></center>
+<br>
+<br>
+    <form method = "POST" action = "submitProduct" enctype = "multipart/form-data">
+    {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Product Name</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" name = "productName" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        
+        <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+        
+        <select class="form-select" aria-label="Default select example" name = "category" value = "men" required>
+            {% if categories %}
+            {% for item in categories %}
+            <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+            {% endif %}
+        </select>
+
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Actual Price</span>
+            <span class="input-group-text">₹</span>
+            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value = 0 min="0" name = "actual" required>
+            <span class="input-group-text">.00</span>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Selling Price</span>
+            <span class="input-group-text">₹</span>
+            <input type="number" class="form-control" aria-label="Amount (to the nearest rupees)" value = 0 min="0" name = "selling" required>
+            <span class="input-group-text">.00</span>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Discount Coupon</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name = "coupon" value="">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Description of the Product</span>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description"  required></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Stock</span>
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value = 1 min = 1 name = "stock" required>
+        </div>
+
+        <hr>
+        <h5>Product Images</h5>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">First Image</label>
+            <input class="form-control" type="file" id="formFile" name = "image1" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Second Image</label>
+            <input class="form-control" type="file" id="formFile" name = "image2" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Third Image</label>
+            <input class="form-control" type="file" id="formFile" name = "image3" required>
+        </div>
+        <hr>    
+
+        <center>
+        <button type="submit" class="btn btn-success">POST</button>
+        </center>
+
+    </form>
+
+</div>
+{% endblock body %}

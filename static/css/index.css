@@ -1,0 +1,92 @@
+.carousel-item
+{
+    height: 500px;
+} 
+.cartButton
+{
+  background-color: rgb(253, 220, 150) !important;
+  border-style: none;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear;
+}
+.cardButton:hover
+{
+  transform: scale(1.12);
+}
+
+.search_block
+{
+    width: 240px !important;
+}
+.search_button
+{
+    color:rgb(75, 73, 73) !important;
+}
+.col-md-4 img{
+    height: 180px !important;
+    width: 160px !important;
+}
+
+.cardbutton:hover
+{
+    background-color: rgb(255, 216, 132);
+    box-shadow: 0 0px 0px 0 rgba(27, 81, 190, 0);
+    transform: scale(0.98);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.accordion
+{
+    border-color: brown !important;
+    margin: 2px;
+    border-width: 2px !important;
+    border: 2px !important;
+}
+
+.quote ,.featured
+{
+    margin: 15px !important;
+    background-color:  rgb(253, 220, 150) !important;
+}
+.card:hover
+{
+    margin: 15px !important;
+    background-color:  rgb(255, 246, 119) !important;
+}
+
+.tags:hover
+{
+    /* background-color:  rgb(255, 246, 119) !important; */
+    transform: scale(1.17) !important;
+}
+
+.footbutton
+{
+    width: 130px !important;
+    background-color: #fff5ca !important;
+    margin: 3px;
+}
+.footbutton:hover
+{
+    background-color:  rgb(255, 246, 119) !important;
+    color: black;
+}
+.createButton
+{
+    width: 130px !important;
+    background-color: #ffe398 !important;
+    margin: 3px;
+    height: 80px;
+}
+.createButton:hover
+{
+    background-color:  rgb(255, 246, 119) !important;
+    color: black;
+}
+
+
+

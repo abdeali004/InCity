@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href = {% static '/css/products.css' %} >
+{% endblock style %}
+{% block title %}
+Products Page
+{% endblock title %}
+
+
+{% block body %}
+
+  <!--container starts-->
+  <div class = "container">
+  <!--row starts-->
+  <div class = "row">
+  <!--column1-->
+  <div class = "col">
+    <div class="card" style="width: 12rem;">
+  <img src="{% static '/img/menswear.jpg' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <a href="#" class="btn butn">View</a>
+  </div>
+</div>
+</div>
+<!--column1 ends-->
+</div>
+<!--row ends-->
+</div>
+<!--container ends-->
+   {% endblock body %}

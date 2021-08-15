@@ -1,0 +1,29 @@
+
+
+.container
+{
+    margin-top: 10px;
+    border: black;;
+    border-width: 3px;
+}
+
+.butn{
+    background-color: #fad8c1;
+    color:rgb(75, 73, 73);
+}
+
+.butn:hover
+{
+    background-color: #fcb281 !important;
+
+}
+
+.card
+{
+    margin: 5px;
+}
+
+/* .card img{
+    height: 180px !important;
+    width: 160px !important;
+} */

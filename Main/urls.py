@@ -1,0 +1,36 @@
+from django.contrib import admin
+from django.urls import path
+import Main.views as views
+
+urlpatterns = [
+    path('', views.loginUser),
+    path('home', views.home, name = "home"),
+    path('register', views.register),
+    path('login', views.loginUser),
+    path('logout', views.logoutUser, name = "logout"),
+    path('shop/<str:productUrl>', views.shop, name = "shop"),
+    path('startupDetails', views.ajaxStartupDetails),
+    path('profile', views.profile, name = "profile"),
+    path('profileEdit', views.profileEdit),
+    path('cart', views.cart, name = "myCart"),
+    path('wishlist', views.wishlist, name = "myWishlist"),
+    path('myProducts', views.myProducts ,name = "myProducts"),
+    path('myOrders', views.myOrders,name = "myOrders"),
+    path('productDetail/<str:productUrl>', views.productPage, name = "productDetail"),
+    path('product/<str:productUrl>', views.productSearch, name = "product"),
+    path('editProduct/<str:productId>', views.editProduct),
+    path('updateProduct/<str:productIdIn>', views.updateProduct, name = "updateProduct"),
+    path('editShop', views.editShop ,name = "editShop"),
+    path('createShop', views.createShop),
+    path('submitShop', views.submitShop),
+    path('updateShop', views.updateShop),
+    path('createProduct', views.createProduct, name = "createProduct"),
+    path('submitProduct', views.submitProduct),
+    path('ajaxDeleteProduct', views.ajaxDeleteProduct, name = "ajaxDeleteProduct"),
+    path('readCart', views.readCart),
+    path('updateCart', views.updateCart),
+    path('readWishlist', views.readWishlist),
+    path('updateWishlist', views.updateWishlist),
+    path('search', views.search, name = "search"),
+    path('ordered', views.ordered, name = "ordered"),
+]
